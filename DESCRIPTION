@@ -1,6 +1,6 @@
 Package: matchr
 Title: Exact and Inexact Matching
-Version: 0.0.1
+Version: 0.0.1.9000
 Authors@R: 
     person(given = "Thomas",
            family = "Bøjer Rasmussen",
