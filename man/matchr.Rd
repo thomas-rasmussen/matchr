@@ -2,7 +2,7 @@
 % Please edit documentation in R/matchr.R
 \name{matchr}
 \alias{matchr}
-\title{Sequential/parallel matching}
+\title{Sequential and parallel matching}
 \usage{
 matchr(
   dat_case,
@@ -10,33 +10,45 @@ matchr(
   match_exact = NULL,
   match_inexact = NULL,
   n_controls = 1L,
+  parallel = FALSE,
   split_n = 1L,
-  sequential = TRUE,
   seed = NULL
 )
 }
 \arguments{
-\item{dat_case}{data.table}
+\item{dat_case}{A data.frame. Data on cases.}
 
-\item{dat_ctrl}{data.table}
+\item{dat_ctrl}{A data.frame. Data on potential controls. Column names,
+order and types must be the same as in \code{dat_case}.}
 
-\item{match_exact}{character vector}
+\item{match_exact}{Character vector. Variables on which to do exact matching.}
 
-\item{match_inexact}{character string}
+\item{match_inexact}{String with inexact matching criterias. See details and
+examples.}
 
-\item{n_controls}{integer}
+\item{n_controls}{Numeric vector of length 1. Number of controls to match to
+each case.}
 
-\item{split_n}{integer}
+\item{parallel}{Logical vector of length one. Determines if matching is done
+in parallel or sequentially, splitting the case data into \code{split_n} chunks.
+By default the matching is done sequentially.}
 
-\item{sequential}{logical}
+\item{split_n}{Integer vector of length 1. The number of chunks the case data
+is split into.}
 
-\item{seed}{integer}
+\item{seed}{Numeric vector of length 1 that can be interpreted as an integer.}
 }
 \value{
 data.table
 }
 \description{
-Sequential/parallel matching
+Facilitates matching in very large populations, where we either want to
+find matches in parallel to speed up the process, or find matches
+sequentially for subsets of the cases, to handle RAM limitations.
+}
+\details{
+The function is a wrapper around \code{match_controls} using the future.apply
+package to either do the matching sequentially or in parallel.
 }
 \examples{
 abs
